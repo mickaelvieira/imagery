@@ -47,10 +47,10 @@ final class Image extends \SplFileInfo
     {
         parent::__construct($file_name);
 
-        $info = @getimagesize($this->getPath(), $iptc);
+        $info = @getimagesize($this->getPathname(), $iptc);
 
         if (!$info) {
-            throw new \LogicException(sprintf("File %s is not an image", $this->getPath()));
+            throw new \LogicException(sprintf("File %s is not an image", $this->getPathname()));
         }
 
         $this->width     = $info[0];
@@ -58,8 +58,10 @@ final class Image extends \SplFileInfo
         $this->imageType = $info[2];
         $this->mimeType  = $info['mime'];
 
-        $this->iptc = new DataCollection((new Extractor\Iptc())->extract($this->getPath()));
-        $this->exif = new DataCollection((new Extractor\Exif())->extract($this->getPath()));
+        if ($this->isJpeg()) {
+            $this->iptc = new DataCollection((new Extractor\Iptc())->extract($this->getPathname()));
+            $this->exif = new DataCollection((new Extractor\Exif())->extract($this->getPathname()));
+        }
     }
 
     /**
@@ -107,7 +109,7 @@ final class Image extends \SplFileInfo
      */
     public function isLandscape()
     {
-        return ($this->getWidth() > $this->getHeight());
+        return ($this->width > $this->height);
     }
 
     /**
@@ -115,7 +117,7 @@ final class Image extends \SplFileInfo
      */
     public function isPortrait()
     {
-        return ($this->getWidth() < $this->getHeight());
+        return ($this->width < $this->height);
     }
 
     /**
@@ -131,7 +133,7 @@ final class Image extends \SplFileInfo
      */
     public function isJpeg()
     {
-        return ($this->getType() == IMAGETYPE_JPEG);
+        return ($this->imageType === IMAGETYPE_JPEG);
     }
 
     /**
@@ -139,7 +141,7 @@ final class Image extends \SplFileInfo
      */
     public function isGif()
     {
-        return ($this->getType() == IMAGETYPE_GIF);
+        return ($this->imageType === IMAGETYPE_GIF);
     }
 
     /**
@@ -147,7 +149,7 @@ final class Image extends \SplFileInfo
      */
     public function isPng()
     {
-        return ($this->getType() == IMAGETYPE_PNG);
+        return ($this->imageType === IMAGETYPE_PNG);
     }
 
     /**
@@ -156,11 +158,11 @@ final class Image extends \SplFileInfo
     public function getResource()
     {
         if ($this->isJpeg()) {
-            $resource = imagecreatefromjpeg($this->getPath());
+            $resource = imagecreatefromjpeg($this->getPathname());
         } else if ($this->isGif()) {
-            $resource = imagecreatefromgif($this->getPath());
+            $resource = imagecreatefromgif($this->getPathname());
         } else if ($this->isPng()) {
-            $resource = imagecreatefrompng($this->getPath());
+            $resource = imagecreatefrompng($this->getPathname());
         } else {
             throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
         }
