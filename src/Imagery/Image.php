@@ -59,8 +59,6 @@ final class Image extends \SplFileInfo
         $this->mimeType  = $info['mime'];
 
         if ($this->isJpeg()) {
-
-            var_dump($iptc);
             if (is_array($iptc)) {
                 $this->iptc = new DataCollection((new Extractor\Iptc())->extract($iptc));
             }
