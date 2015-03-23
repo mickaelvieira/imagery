@@ -59,8 +59,15 @@ final class Image extends \SplFileInfo
         $this->mimeType  = $info['mime'];
 
         if ($this->isJpeg()) {
-            $this->iptc = new DataCollection((new Extractor\Iptc())->extract($this->getPathname()));
-            $this->exif = new DataCollection((new Extractor\Exif())->extract($this->getPathname()));
+
+            var_dump($iptc);
+            if (is_array($iptc)) {
+                $this->iptc = new DataCollection((new Extractor\Iptc())->extract($iptc));
+            }
+            if (function_exists("exif_read_data")) {
+                $sections = @exif_read_data($this->getPathname(), null, true, false);
+                $this->exif = new DataCollection((new Extractor\Exif())->extract($sections));
+            }
         }
     }
 
