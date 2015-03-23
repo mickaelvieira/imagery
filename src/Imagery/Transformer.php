@@ -102,7 +102,7 @@ final class Transformer
         } elseif ($this->image->isGif()) {
             $background = imagecolorallocatealpha($image, 255, 255, 255, 1);
             imagecolortransparent($image, $background);
-            imagefill($image, 0, 0 , $background);
+            imagefill($image, 0, 0, $background);
             imagesavealpha($image, true);
         } elseif ($this->image->isPng()) {
             imagealphablending($image, false);
@@ -178,7 +178,7 @@ final class Transformer
      */
     public function flip($mode)
     {
-        $result = imageflip($this->resource , $mode);
+        $result = imageflip($this->resource, $mode);
         if (!$result) {
             throw new \Exception("Cannot flip image");
         }

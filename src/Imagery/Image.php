@@ -173,9 +173,9 @@ final class Image extends \SplFileInfo
     {
         if ($this->isJpeg()) {
             $resource = imagecreatefromjpeg($this->getPathname());
-        } else if ($this->isGif()) {
+        } elseif ($this->isGif()) {
             $resource = imagecreatefromgif($this->getPathname());
-        } else if ($this->isPng()) {
+        } elseif ($this->isPng()) {
             $resource = imagecreatefrompng($this->getPathname());
         } else {
             throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");

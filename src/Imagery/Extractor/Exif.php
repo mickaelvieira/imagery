@@ -30,7 +30,7 @@ final class Exif implements Extractor
 
         $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($data));
 
-        foreach($iterator as $k => $v) {
+        foreach ($iterator as $k => $v) {
             if (!is_numeric($k)) {
                 $k = preg_replace('/\./', '_', $k);
                 $extracted[$k] = $v;

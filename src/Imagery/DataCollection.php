@@ -40,7 +40,7 @@ final class DataCollection implements \Countable, \IteratorAggregate
      */
     public function find($name)
     {
-        $data = array_filter($this->data, function(Data $data) use ($name) {
+        $data = array_filter($this->data, function (Data $data) use ($name) {
             return ($data->getName() === $name);
         });
         return (current($data)) ?: null;
