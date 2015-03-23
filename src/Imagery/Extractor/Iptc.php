@@ -8,16 +8,14 @@ use Imagery\Extractor;
 final class Iptc implements Extractor
 {
     /**
-     * @param string $path
+     * @param array $data
      * @return array
      */
-    public function extract($path)
+    public function extract(array $data)
     {
-        getimagesize($path, $iptc);
-
         $extracted = [];
 
-        if (isset($data) && is_array($data) && isset($data["APP13"])) {
+        if (is_array($data) && isset($data["APP13"])) {
 
             if ($iptc = iptcparse($data["APP13"])) {
 

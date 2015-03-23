@@ -7,8 +7,8 @@ namespace Imagery;
 interface Extractor
 {
     /**
-     * @param string $path
+     * @param array $data
      * @return array
      */
-    public function extract($path);
+    public function extract(array $data);
 }
