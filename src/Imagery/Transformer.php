@@ -52,12 +52,12 @@ final class Transformer
 
     /**
      * @param string $path
-     * @param int $compression from 0 to 100
+     * @param int $quality from 0 to 100
      * @return bool
      */
-    public function save($path, $compression = 100)
+    public function save($path, $quality = 100)
     {
-        $compression = $this->prepareCompression($compression);
+        $quality = $this->prepareQuality($quality);
 
         $image = $this->getCanvas();
 
@@ -76,11 +76,11 @@ final class Transformer
 
         if ($this->image->isJpeg()) {
             imageinterlace($this->resource, true);
-            $result = imagejpeg($this->resource, $path, $compression);
+            $result = imagejpeg($this->resource, $path, $quality);
         } elseif ($this->image->isGif()) {
             $result = imagegif($this->resource, $path);
         } elseif ($this->image->isPng()) {
-            $result = imagepng($this->resource, $path, $compression);
+            $result = imagepng($this->resource, $path, $quality);
         } else {
             throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
         }
@@ -186,25 +186,25 @@ final class Transformer
     }
 
     /**
-     * @param $compression
+     * @param $quality
      * @return float|int
      */
-    private function prepareCompression($compression)
+    private function prepareQuality($quality)
     {
         if ($this->image->isPng()) {
 
-            $compression = ceil($compression / 10);
-            if ($compression < 1) {
-                $compression = 1;
+            $quality = ceil($quality / 10);
+            if ($quality < 1) {
+                $quality = 1;
             }
-            $compression = (10 - $compression);
+            $quality = (10 - $quality);
 
-        } elseif ($compression > 100) {
-            $compression = 100;
-        } elseif ($compression < 0) {
-            $compression = 0;
+        } elseif ($quality > 100) {
+            $quality = 100;
+        } elseif ($quality < 0) {
+            $quality = 0;
         }
 
-        return $compression;
+        return $quality;
     }
 }

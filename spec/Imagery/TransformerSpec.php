@@ -30,6 +30,15 @@ class TransformerSpec extends ObjectBehavior
         $this->shouldHaveType('Imagery\Transformer');
     }
 
+    /**
+     * https://github.com/mikey179/vfsStream/issues/57
+     */
+    function xit_should_save_the_image()
+    {
+        $this->beConstructedWith(new Image(vfsStream::url("dir/file.jpg")));
+        $this->save(vfsStream::url("dir/file2.jpg"));
+    }
+
     function getJpeg()
     {
         $gd = imagecreate(500, 400);
