@@ -34,7 +34,7 @@ final class DataCollection implements \Countable, \IteratorAggregate
         $data = array_filter($this->data, function(Data $data) use ($name) {
             return ($data->getName() === $name);
         });
-        return current($data);
+        return (current($data)) ?: null;
     }
 
     /**

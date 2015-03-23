@@ -25,7 +25,7 @@ final class Data
      */
     public function __construct($name, $value)
     {
-        $this->name = (string)$name;
+        $this->name  = (string)$name;
         $this->value = (string)$value;
     }
 

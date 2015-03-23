@@ -59,4 +59,10 @@ class DataCollectionSpec extends ObjectBehavior
         ]);
         $this->find('target')->shouldHaveType('Imagery\Data');
     }
+
+    function it_should_return_null_when_it_does_not_find_a_data()
+    {
+        $this->beConstructedWith();
+        $this->find('target')->shouldBeNull();
+    }
 }
