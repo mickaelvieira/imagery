@@ -57,7 +57,7 @@ final class GifRenderer implements Renderer
         imagefill($image, 0, 0, $background);
         imagesavealpha($image, true);
 
-        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height, $this->width, $this->height);
+        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height);
 
         return $image;
     }

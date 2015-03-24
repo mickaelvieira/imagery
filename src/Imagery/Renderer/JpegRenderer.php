@@ -54,7 +54,7 @@ final class JpegRenderer implements Renderer
         $background = imagecolorallocate($image, 255, 255, 255);
         imagefilledrectangle($image, 0, 0, $this->width, $this->height, $background);
 
-        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height, $this->width, $this->height);
+        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height);
 
         return $image;
     }

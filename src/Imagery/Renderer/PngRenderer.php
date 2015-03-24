@@ -54,7 +54,7 @@ final class PngRenderer implements Renderer
         imagealphablending($image, false);
         imagesavealpha($image, true);
 
-        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height, $this->width, $this->height);
+        imagecopy($image, $this->source, 0, 0, 0, 0, $this->width, $this->height);
 
         return $image;
     }
