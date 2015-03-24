@@ -57,11 +57,11 @@ final class Image extends \SplFileInfo
 
         if ($this->isJpeg()) {
             if (is_array($iptc)) {
-                $this->iptc = new DataCollection((new Extractor\Iptc())->extract($iptc));
+                $this->iptc = new DataCollection((new Extractor\IptcExtractor())->extract($iptc));
             }
             if (function_exists("exif_read_data")) {
                 $sections = @exif_read_data($this->getPathname(), null, true, false);
-                $this->exif = new DataCollection((new Extractor\Exif())->extract($sections));
+                $this->exif = new DataCollection((new Extractor\ExifExtractor())->extract($sections));
             }
         }
     }
