@@ -67,6 +67,18 @@ final class Image extends \SplFileInfo
     }
 
     /**
+     * @param null|string $path
+     * @param int  $quality
+     * @return bool
+     */
+    public function save($path = null, $quality = 100)
+    {
+        $renderer = new Renderer($this->canvas);
+
+        return $renderer->render($path, $quality);
+    }
+
+    /**
      * @return int
      */
     public function getWidth()
