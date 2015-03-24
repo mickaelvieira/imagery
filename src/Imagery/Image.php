@@ -18,27 +18,6 @@ namespace Imagery;
  */
 final class Image extends \SplFileInfo
 {
-
-    /**
-     * @var int
-     */
-    private $width;
-
-    /**
-     * @var int
-     */
-    private $height;
-
-    /**
-     * @var string
-     */
-    private $mimeType;
-
-    /**
-     * @var int
-     */
-    private $imageType;
-
     /**
      * @var \Imagery\DataCollection
      */
@@ -73,11 +52,6 @@ final class Image extends \SplFileInfo
             throw new \LogicException(sprintf("File %s is not an image", $this->getPathname()));
         }
 
-        $this->width     = $info[0];
-        $this->height    = $info[1];
-        $this->imageType = $info[2];
-        $this->mimeType  = $info['mime'];
-
         $this->commander = ($commander) ?: new CommandManager();
         $this->canvas    = Canvas::fromPath($this->getPathname());
 
@@ -97,7 +71,7 @@ final class Image extends \SplFileInfo
      */
     public function getWidth()
     {
-        return $this->width;
+        return $this->canvas->getWidth();
     }
 
     /**
@@ -105,7 +79,7 @@ final class Image extends \SplFileInfo
      */
     public function getHeight()
     {
-        return $this->height;
+        return $this->canvas->getHeight();
     }
 
     /**
@@ -113,7 +87,7 @@ final class Image extends \SplFileInfo
      */
     public function getMimeType()
     {
-        return $this->mimeType;
+        return $this->canvas->getMime();
     }
 
     /**
@@ -121,7 +95,7 @@ final class Image extends \SplFileInfo
      */
     public function getImageType()
     {
-        return $this->imageType;
+        return $this->canvas->getType();
     }
 
     /**
@@ -137,7 +111,7 @@ final class Image extends \SplFileInfo
      */
     public function isLandscape()
     {
-        return ($this->width > $this->height);
+        return ($this->canvas->getWidth() > $this->canvas->getHeight());
     }
 
     /**
@@ -145,7 +119,7 @@ final class Image extends \SplFileInfo
      */
     public function isPortrait()
     {
-        return ($this->width < $this->height);
+        return ($this->canvas->getWidth() < $this->canvas->getHeight());
     }
 
     /**
@@ -161,7 +135,7 @@ final class Image extends \SplFileInfo
      */
     public function isJpeg()
     {
-        return ($this->imageType === IMAGETYPE_JPEG);
+        return ($this->canvas->getType() === IMAGETYPE_JPEG);
     }
 
     /**
@@ -169,7 +143,7 @@ final class Image extends \SplFileInfo
      */
     public function isGif()
     {
-        return ($this->imageType === IMAGETYPE_GIF);
+        return ($this->canvas->getType() === IMAGETYPE_GIF);
     }
 
     /**
@@ -177,7 +151,7 @@ final class Image extends \SplFileInfo
      */
     public function isPng()
     {
-        return ($this->imageType === IMAGETYPE_PNG);
+        return ($this->canvas->getType() === IMAGETYPE_PNG);
     }
 
     /**

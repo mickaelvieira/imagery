@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of CollectionJson, a php implementation
+ * of the Collection+JSON Media Type
+ *
+ * (c) Mickaël Vieira <contact@mickael-vieira.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Imagery;
 
@@ -9,16 +18,24 @@ namespace Imagery;
  */
 final class Canvas
 {
+
+    /**
+     * @var int
+     */
+    private $type;
+
     /**
      * @var resource
      */
     private $resource;
 
     /**
+     * @param int $type
      * @param resource $resource
      */
-    public function __construct($resource)
+    public function __construct($type, $resource)
     {
+        $this->type = $type;
         $this->isResource($resource);
         $this->resource = $resource;
     }
@@ -41,7 +58,7 @@ final class Canvas
             throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
         }
 
-        return new self($resource);
+        return new self($type, $resource);
     }
 
     /**
@@ -63,6 +80,22 @@ final class Canvas
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMime()
+    {
+        return image_type_to_mime_type($this->type);
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
