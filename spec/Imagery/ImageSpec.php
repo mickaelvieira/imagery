@@ -130,27 +130,6 @@ class ImageSpec extends ObjectBehavior
         $this->getIptc()->shouldBeNull();
     }
 
-    function it_should_return_the_jpeg_resource()
-    {
-        $this->beConstructedWith(vfsStream::url('dir/file.jpg'));
-        $this->shouldNotThrow('\LogicException')->duringGetResource();
-        $this->getResource()->shouldNotBeNull();
-    }
-
-    function it_should_return_the_gif_resource()
-    {
-        $this->beConstructedWith(vfsStream::url('dir/file.gif'));
-        $this->shouldNotThrow('\LogicException')->duringGetResource();
-        $this->getResource()->shouldNotBeNull();
-    }
-
-    function it_should_return_the_png_resource()
-    {
-        $this->beConstructedWith(vfsStream::url('dir/file.png'));
-        $this->shouldNotThrow('\LogicException')->duringGetResource();
-        $this->getResource()->shouldNotBeNull();
-    }
-
     function it_should_rotate_the_resource()
     {
         $this->beConstructedWith(vfsStream::url('dir/file.png'));

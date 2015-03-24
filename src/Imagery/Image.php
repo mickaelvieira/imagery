@@ -155,23 +155,6 @@ final class Image extends \SplFileInfo
     }
 
     /**
-     * @return null|resource
-     */
-    public function getResource()
-    {
-        if ($this->isJpeg()) {
-            $resource = imagecreatefromjpeg($this->getPathname());
-        } elseif ($this->isGif()) {
-            $resource = imagecreatefromgif($this->getPathname());
-        } elseif ($this->isPng()) {
-            $resource = imagecreatefrompng($this->getPathname());
-        } else {
-            throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
-        }
-        return $resource;
-    }
-
-    /**
      * @param string $name
      * @param array $arguments
      * @return \Imagery\Image
