@@ -18,18 +18,17 @@ namespace Imagery\Renderer;
  */
 final class Factory
 {
-
     /**
      * @var array
      */
-    private static $renderers;
+    private $renderers;
 
     /**
      *
      */
     public function __construct()
     {
-        self::$renderers = [
+        $this->renderers = [
             IMAGETYPE_JPEG => new JpegRenderer(),
             IMAGETYPE_GIF  => new GifRenderer(),
             IMAGETYPE_PNG  => new PngRenderer()
@@ -40,8 +39,12 @@ final class Factory
      * @param int $type
      * @return \Imagery\Renderer\Renderer|null
      */
-    public static function select($type)
+    public function select($type)
     {
-        return array_key_exists($type, self::$renderers) ? self::$renderers[$type] : null;
+        if (array_key_exists($type, $this->renderers)) {
+            return $this->renderers[$type];
+        } else {
+            throw new \BadMethodCallException(sprintf("Type %s is not supported", $type));
+        }
     }
 }

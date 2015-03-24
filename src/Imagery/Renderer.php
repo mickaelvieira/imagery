@@ -26,11 +26,17 @@ final class Renderer
     private $canvas;
 
     /**
+     * @var \Imagery\Renderer\Factory
+     */
+    private $factory;
+
+    /**
      * @param \Imagery\Canvas $canvas
      */
     public function __construct(Canvas $canvas)
     {
-        $this->canvas = $canvas;
+        $this->canvas  = $canvas;
+        $this->factory = new RendererFactory();
     }
 
     /**
@@ -41,7 +47,7 @@ final class Renderer
     public function render($path, $quality)
     {
         $quality  = $this->prepareQuality($quality);
-        $renderer = RendererFactory::select($this->canvas->getImageType());
+        $renderer = $this->factory->select($this->canvas->getImageType());
 
         return $renderer->render($path, $this->canvas->getResource(), $quality);
     }
