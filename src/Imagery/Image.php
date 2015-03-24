@@ -136,12 +136,14 @@ final class Image extends \SplFileInfo
         $command = $this->commander->find($name);
 
         if ($command) {
+
+            $options = (!empty($arguments)) ? $arguments[0] : [];
+            $options = new Options($options);
+
             $this->canvas = $this->canvas->withResource(
-                $command->execute(
-                    $this->canvas->getResource(),
-                    new Options($arguments)
-                )
+                $command->execute($this->canvas->getResource(), $options)
             );
+
         } elseif (method_exists($this->canvas, $name)) {
             return $this->canvas->$name();
         } else {
