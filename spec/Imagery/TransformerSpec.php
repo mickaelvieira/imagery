@@ -15,31 +15,31 @@ class TransformerSpec extends ObjectBehavior
     private $workDir;
 
 
-    function let()
+    /*function let()
     {
         $this->workDir = vfsStream::setup('dir');
         $jpeg = vfsStream::newFile('file.jpg');
         $jpeg->setContent($this->getJpeg());
 
         $this->workDir->addChild($jpeg);
-    }
+    }*/
 
-    function it_is_initializable()
+/*    function it_is_initializable()
     {
         $this->beConstructedWith(new Image(vfsStream::url("dir/file.jpg")));
         $this->shouldHaveType('Imagery\Transformer');
-    }
+    }*/
 
     /**
      * https://github.com/mikey179/vfsStream/issues/57
      */
-    function xit_should_save_the_image()
+    /*function xit_should_save_the_image()
     {
         $this->beConstructedWith(new Image(vfsStream::url("dir/file.jpg")));
         $this->save(vfsStream::url("dir/file2.jpg"));
-    }
+    }*/
 
-    function getJpeg()
+    /*function getJpeg()
     {
         $gd = imagecreate(500, 400);
         ob_start();
@@ -47,7 +47,7 @@ class TransformerSpec extends ObjectBehavior
         $content = ob_get_clean();
 
         return $content;
-    }
+    }*/
 
 
 }
