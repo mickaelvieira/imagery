@@ -12,13 +12,11 @@
 
 namespace Imagery\Extractor;
 
-use Imagery\Extractor;
-
 /**
  * Class Exif
  * @package Imagery\Extractor
  */
-final class Exif implements Extractor
+final class ExifExtractor implements Extractor
 {
     /**
      * @param array $data

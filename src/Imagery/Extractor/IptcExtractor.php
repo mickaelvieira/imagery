@@ -12,13 +12,11 @@
 
 namespace Imagery\Extractor;
 
-use Imagery\Extractor;
-
 /**
  * Class Iptc
  * @package Imagery\Extractor
  */
-final class Iptc implements Extractor
+final class IptcExtractor implements Extractor
 {
     /**
      * @param array $data
