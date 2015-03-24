@@ -34,9 +34,10 @@ final class CommandManager
         $this->commands = [
             new Command\Crop(),
             new Command\Flip(),
-            new Command\Interlace(),
+            new Command\Scale(),
             new Command\Resize(),
-            new Command\Rotate()
+            new Command\Rotate(),
+            new Command\Interlace(),
         ];
     }
 
