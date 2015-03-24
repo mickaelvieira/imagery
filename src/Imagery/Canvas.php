@@ -24,6 +24,27 @@ final class Canvas
     }
 
     /**
+     * @param string $path
+     * @return resource
+     */
+    public static function fromPath($path)
+    {
+        $type = exif_imagetype($path);
+
+        if ($type === IMAGETYPE_JPEG) {
+            $resource = imagecreatefromjpeg($path);
+        } elseif ($type === IMAGETYPE_GIF) {
+            $resource = imagecreatefromgif($path);
+        } elseif ($type === IMAGETYPE_PNG) {
+            $resource = imagecreatefrompng($path);
+        } else {
+            throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
+        }
+
+        return new self($resource);
+    }
+
+    /**
      * @param resource $resource
      * @return \Imagery\Canvas
      */

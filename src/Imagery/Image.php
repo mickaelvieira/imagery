@@ -79,6 +79,7 @@ final class Image extends \SplFileInfo
         $this->mimeType  = $info['mime'];
 
         $this->commander = ($commander) ?: new CommandManager();
+        $this->canvas    = Canvas::fromPath($this->getPathname());
 
         if ($this->isJpeg()) {
             if (is_array($iptc)) {
@@ -203,27 +204,18 @@ final class Image extends \SplFileInfo
      */
     public function __call($name, $arguments)
     {
-        $canvas  = $this->getCanvas();
         $command = $this->commander->find($name);
 
         if ($command) {
-            $canvas->withResource(
-                $command->execute($canvas->getResource(), new Options($arguments))
+            $this->canvas = $this->canvas->withResource(
+                $command->execute(
+                    $this->canvas->getResource(),
+                    new Options($arguments)
+                )
             );
         } else {
             throw new \LogicException(sprintf("Unknow command %s", $command));
         }
         return $this;
-    }
-
-    /**
-     * @return \Imagery\Canvas
-     */
-    private function getCanvas()
-    {
-        if (is_null($this->canvas)) {
-            $this->canvas = new Canvas($this->getResource());
-        }
-        return $this->canvas;
     }
 }
