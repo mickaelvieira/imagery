@@ -41,23 +41,16 @@ final class Image extends \SplFileInfo
     private $canvas;
 
     /**
-     * @param string                       $file_name
-     * @param \Imagery\CommandManager      $commander
+     * @param string $file_name
      */
-    public function __construct(
-        $file_name,
-        CommandManager $commander = null
-    ) {
+    public function __construct($file_name)
+    {
         parent::__construct($file_name);
 
-        $info = @getimagesize($this->getPathname());
-
-        if (!$info) {
-            throw new \LogicException(sprintf("File %s is not an image", $this->getPathname()));
-        }
+        $this->isImage();
 
         $this->canvas    = Canvas::fromPath($this->getPathname());
-        $this->commander = ($commander) ?: new CommandManager();
+        $this->commander = new CommandManager();
 
         if ($this->isJpeg()) {
             $this->iptc = ExtractorFactory::select('iptc')->extract($this->getPathname());
@@ -155,5 +148,16 @@ final class Image extends \SplFileInfo
             throw new \LogicException(sprintf("Unknown command %s", $command));
         }
         return $this;
+    }
+
+    /**
+     * @throw \LogicException
+     */
+    private function isImage()
+    {
+        $info = @getimagesize($this->getPathname());
+        if (!$info) {
+            throw new \LogicException(sprintf("File %s is not an image", $this->getPathname()));
+        }
     }
 }
