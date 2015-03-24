@@ -151,6 +151,47 @@ class ImageSpec extends ObjectBehavior
         $this->getResource()->shouldNotBeNull();
     }
 
+    function it_should_rotate_the_resource()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldNotThrow('\Exception')->duringRotate();
+    }
+
+    function it_should_flip_the_resource()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldNotThrow('\Exception')->duringFlip();
+    }
+
+    function it_should_interlace_the_resource()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldNotThrow('\Exception')->duringInterlace();
+    }
+
+    function it_should_crop_the_resource()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldNotThrow('\Exception')->duringCrop();
+    }
+
+    function it_should_resize_the_resource()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldNotThrow('\Exception')->duringResize();
+    }
+
+    function it_should_throw_when_there_is_no_command_available()
+    {
+        $this->beConstructedWith(vfsStream::url('dir/file.png'));
+        $this->shouldThrow('\Exception')->duringTest();
+    }
+
+    function letGo()
+    {
+        $this->workDir = null;
+    }
+
     function getJpeg()
     {
         $gd = imagecreate(500, 400);

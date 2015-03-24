@@ -50,9 +50,20 @@ final class Image extends \SplFileInfo
     private $exif;
 
     /**
-     * @param string $file_name
+     * @var \Imagery\CommandManager
      */
-    public function __construct($file_name)
+    private $commander;
+
+    /**
+     * @var Canvas
+     */
+    private $canvas;
+
+    /**
+     * @param string $file_name
+     * @param \Imagery\CommandManager $commander
+     */
+    public function __construct($file_name, CommandManager $commander = null)
     {
         parent::__construct($file_name);
 
@@ -66,6 +77,8 @@ final class Image extends \SplFileInfo
         $this->height    = $info[1];
         $this->imageType = $info[2];
         $this->mimeType  = $info['mime'];
+
+        $this->commander = ($commander) ?: new CommandManager();
 
         if ($this->isJpeg()) {
             if (is_array($iptc)) {
@@ -181,5 +194,36 @@ final class Image extends \SplFileInfo
             throw new \LogicException("Cannot generate resource, file type must be JPEG, GIF, PNG");
         }
         return $resource;
+    }
+
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return \Imagery\Image
+     */
+    public function __call($name, $arguments)
+    {
+        $canvas  = $this->getCanvas();
+        $command = $this->commander->find($name);
+
+        if ($command) {
+            $canvas->withResource(
+                $command->execute($canvas->getResource(), new Options($arguments))
+            );
+        } else {
+            throw new \LogicException(sprintf("Unknow command %s", $command));
+        }
+        return $this;
+    }
+
+    /**
+     * @return \Imagery\Canvas
+     */
+    private function getCanvas()
+    {
+        if (is_null($this->canvas)) {
+            $this->canvas = new Canvas($this->getResource());
+        }
+        return $this->canvas;
     }
 }
