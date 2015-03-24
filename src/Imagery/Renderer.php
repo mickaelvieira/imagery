@@ -41,7 +41,7 @@ final class Renderer
     public function render($path, $quality)
     {
         $quality  = $this->prepareQuality($quality);
-        $renderer = RendererFactory::select($this->canvas->getType());
+        $renderer = RendererFactory::select($this->canvas->getImageType());
 
         return $renderer->render($path, $this->canvas->getResource(), $quality);
     }
@@ -52,7 +52,7 @@ final class Renderer
      */
     private function prepareQuality($quality)
     {
-        if ($this->canvas->getType() === IMAGETYPE_PNG) {
+        if ($this->canvas->getImageType() === IMAGETYPE_PNG) {
 
             $quality = ceil($quality / 10);
             if ($quality < 1) {

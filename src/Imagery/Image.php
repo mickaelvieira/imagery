@@ -12,6 +12,8 @@
 
 namespace Imagery;
 
+use Imagery\Extractor\Factory as ExtractorFactory;
+
 /**
  * Class Image
  * @package Imagery
@@ -39,30 +41,27 @@ final class Image extends \SplFileInfo
     private $canvas;
 
     /**
-     * @param string $file_name
-     * @param \Imagery\CommandManager $commander
+     * @param string                       $file_name
+     * @param \Imagery\CommandManager      $commander
      */
-    public function __construct($file_name, CommandManager $commander = null)
-    {
+    public function __construct(
+        $file_name,
+        CommandManager $commander = null
+    ) {
         parent::__construct($file_name);
 
-        $info = @getimagesize($this->getPathname(), $iptc);
+        $info = @getimagesize($this->getPathname());
 
         if (!$info) {
             throw new \LogicException(sprintf("File %s is not an image", $this->getPathname()));
         }
 
-        $this->commander = ($commander) ?: new CommandManager();
         $this->canvas    = Canvas::fromPath($this->getPathname());
+        $this->commander = ($commander) ?: new CommandManager();
 
         if ($this->isJpeg()) {
-            if (is_array($iptc)) {
-                $this->iptc = new DataCollection((new Extractor\IptcExtractor())->extract($iptc));
-            }
-            if (function_exists("exif_read_data")) {
-                $sections = @exif_read_data($this->getPathname(), null, true, false);
-                $this->exif = new DataCollection((new Extractor\ExifExtractor())->extract($sections));
-            }
+            $this->iptc = ExtractorFactory::select('iptc')->extract($this->getPathname());
+            $this->exif = ExtractorFactory::select('exif')->extract($this->getPathname());
         }
     }
 
@@ -76,38 +75,6 @@ final class Image extends \SplFileInfo
         $renderer = new Renderer($this->canvas);
 
         return $renderer->render($path, $quality);
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
-    {
-        return $this->canvas->getWidth();
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->canvas->getHeight();
-    }
-
-    /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->canvas->getMime();
-    }
-
-    /**
-     * @return int
-     */
-    public function getImageType()
-    {
-        return $this->canvas->getType();
     }
 
     /**
@@ -147,7 +114,7 @@ final class Image extends \SplFileInfo
      */
     public function isJpeg()
     {
-        return ($this->canvas->getType() === IMAGETYPE_JPEG);
+        return ($this->canvas->getImageType() === IMAGETYPE_JPEG);
     }
 
     /**
@@ -155,7 +122,7 @@ final class Image extends \SplFileInfo
      */
     public function isGif()
     {
-        return ($this->canvas->getType() === IMAGETYPE_GIF);
+        return ($this->canvas->getImageType() === IMAGETYPE_GIF);
     }
 
     /**
@@ -163,7 +130,7 @@ final class Image extends \SplFileInfo
      */
     public function isPng()
     {
-        return ($this->canvas->getType() === IMAGETYPE_PNG);
+        return ($this->canvas->getImageType() === IMAGETYPE_PNG);
     }
 
     /**
@@ -182,8 +149,10 @@ final class Image extends \SplFileInfo
                     new Options($arguments)
                 )
             );
+        } elseif (method_exists($this->canvas, $name)) {
+            return $this->canvas->$name();
         } else {
-            throw new \LogicException(sprintf("Unknow command %s", $command));
+            throw new \LogicException(sprintf("Unknown command %s", $command));
         }
         return $this;
     }

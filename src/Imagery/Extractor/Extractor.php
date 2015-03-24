@@ -19,8 +19,8 @@ namespace Imagery\Extractor;
 interface Extractor
 {
     /**
-     * @param array $data
-     * @return array
+     * @param string $path
+     * @return \Imagery\DataCollection
      */
-    public function extract(array $data);
+    public function extract($path);
 }

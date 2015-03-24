@@ -85,7 +85,7 @@ final class Canvas
     /**
      * @return string
      */
-    public function getMime()
+    public function getMimeType()
     {
         return image_type_to_mime_type($this->type);
     }
@@ -93,7 +93,7 @@ final class Canvas
     /**
      * @return int
      */
-    public function getType()
+    public function getImageType()
     {
         return $this->type;
     }
@@ -112,6 +112,30 @@ final class Canvas
     public function getHeight()
     {
         return imagesy($this->resource);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isJpeg()
+    {
+        return ($this->type === IMAGETYPE_JPEG);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGif()
+    {
+        return ($this->type === IMAGETYPE_GIF);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPng()
+    {
+        return ($this->type === IMAGETYPE_PNG);
     }
 
     /**

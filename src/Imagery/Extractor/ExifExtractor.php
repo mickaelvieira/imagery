@@ -12,6 +12,8 @@
 
 namespace Imagery\Extractor;
 
+use Imagery\DataCollection;
+
 /**
  * Class Exif
  * @package Imagery\Extractor
@@ -19,22 +21,35 @@ namespace Imagery\Extractor;
 final class ExifExtractor implements Extractor
 {
     /**
-     * @param array $data
-     * @return array
+     * {@inheritdoc}
      */
-    public function extract(array $data)
+    public function extract($path)
     {
-        $extracted = [];
+        $data = [];
+        $raw  = $this->getRawData($path);
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($data));
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($raw));
 
         foreach ($iterator as $k => $v) {
             if (!is_numeric($k)) {
                 $k = preg_replace('/\./', '_', $k);
-                $extracted[$k] = $v;
+                $data[$k] = $v;
             }
         }
 
-        return $extracted;
+        return new DataCollection($data);
+    }
+
+    /**
+     * @param string $path
+     * @return array
+     */
+    private function getRawData($path)
+    {
+        $data = [];
+        if (function_exists("exif_read_data")) {
+            $data = @exif_read_data($path, null, true, false);
+        }
+        return $data;
     }
 }

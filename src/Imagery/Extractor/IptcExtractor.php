@@ -12,6 +12,8 @@
 
 namespace Imagery\Extractor;
 
+use Imagery\DataCollection;
+
 /**
  * Class Iptc
  * @package Imagery\Extractor
@@ -19,16 +21,16 @@ namespace Imagery\Extractor;
 final class IptcExtractor implements Extractor
 {
     /**
-     * @param array $data
-     * @return array
+     * {@inheritdoc}
      */
-    public function extract(array $data)
+    public function extract($path)
     {
-        $extracted = [];
+        $data = [];
+        $raw = $this->getRawData($path);
 
-        if (is_array($data) && isset($data["APP13"])) {
+        if (is_array($raw) && isset($raw["APP13"])) {
 
-            if ($iptc = iptcparse($data["APP13"])) {
+            if ($iptc = iptcparse($raw["APP13"])) {
 
                 $entries = [
                     '2#005'=>'DocumentTitle',
@@ -55,12 +57,25 @@ final class IptcExtractor implements Extractor
                         if (array_key_exists($key, $entries)) {
                             $value = implode("|", $entry);
                             $name  = $entries[$key];
-                            $extracted[$name] = mb_convert_encoding($value, "UTF-8");
+                            $data[$name] = mb_convert_encoding($value, "UTF-8");
                         }
                     }
                 }
             }
         }
-        return $extracted;
+        return new DataCollection($data);
+    }
+
+    /**
+     * @param string $path
+     * @return array
+     */
+    private function getRawData($path)
+    {
+        @getimagesize($path, $data);
+        if (!is_array($data)) {
+            $data = [];
+        }
+        return $data;
     }
 }
