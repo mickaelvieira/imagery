@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,16 +33,16 @@ final class Scale implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
         $scale = $options->get('scale');
 
         if (is_null($scale)) {
-            return $resource;
+            return $canvas;
         }
 
-        $srcWidth  = imagesx($resource);
-        $srcHeight = imagesy($resource);
+        $srcWidth  = $canvas->getWidth();
+        $srcHeight = $canvas->getHeight();
 
         $width  = $srcWidth * $scale / 100;
         $height = $srcHeight * $scale / 100;
@@ -50,7 +51,7 @@ final class Scale implements Command
 
         imagecopyresampled(
             $image,
-            $resource,
+            $canvas->getResource(),
             0,
             0,
             0,
@@ -61,6 +62,6 @@ final class Scale implements Command
             $srcHeight
         );
 
-        return $image;
+        return $canvas->withResource($image);
     }
 }

@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,13 +33,13 @@ final class Resize implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
         $destWidth  = $options->get('width');
         $destHeight = $options->get('height');
 
-        $srcWidth  = imagesx($resource);
-        $srcHeight = imagesy($resource);
+        $srcWidth  = $canvas->getWidth();
+        $srcHeight = $canvas->getHeight();
 
         if (!is_null($destWidth) && is_null($destHeight)) {
             $ratio = $destWidth / $srcWidth;
@@ -55,7 +56,7 @@ final class Resize implements Command
 
         imagecopyresampled(
             $image,
-            $resource,
+            $canvas->getResource(),
             0,
             0,
             0,
@@ -66,6 +67,6 @@ final class Resize implements Command
             $srcHeight
         );
 
-        return $image;
+        return $canvas->withResource($image);
     }
 }

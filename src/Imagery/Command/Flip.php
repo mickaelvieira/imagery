@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,16 +33,16 @@ final class Flip implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
         $mode = $options->get('mode');
 
         if (is_null($mode)) {
-            return $resource;
+            return $canvas;
         }
 
-        $width  = imagesx($resource);
-        $height = imagesy($resource);
+        $width  = $canvas->getWidth();
+        $height = $canvas->getHeight();
 
         $srcX = 0;
         $srcY = 0;
@@ -65,7 +66,7 @@ final class Flip implements Command
 
         imagecopyresampled(
             $image,
-            $resource,
+            $canvas->getResource(),
             0,
             0,
             $srcX,
@@ -76,6 +77,6 @@ final class Flip implements Command
             $srcHeight
         );
 
-        return $image;
+        return $canvas->withResource($image);
     }
 }

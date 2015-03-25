@@ -24,9 +24,9 @@ interface Command
     public function getName();
 
     /**
-     * @param resource $resource
+     * @param \Imagery\Canvas $canvas
      * @param \Imagery\Options $options
      * @return resource
      */
-    public function execute($resource, Options $options = null);
+    public function execute(Canvas $canvas, Options $options = null);
 }

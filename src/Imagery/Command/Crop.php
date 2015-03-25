@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,10 +33,10 @@ final class Crop implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
-        $srcWidth  = imagesx($resource);
-        $srcHeight = imagesx($resource);
+        $srcWidth  = $canvas->getWidth();
+        $srcHeight = $canvas->getHeight();
 
         $width  = $options->get('width', $srcWidth);
         $height = $options->get('height', $srcHeight);
@@ -47,7 +48,7 @@ final class Crop implements Command
 
         imagecopyresampled(
             $image,
-            $resource,
+            $canvas->getResource(),
             0,
             0,
             $srcX,
@@ -58,6 +59,6 @@ final class Crop implements Command
             $height
         );
 
-        return $image;
+        return $canvas->withResource($image);
     }
 }

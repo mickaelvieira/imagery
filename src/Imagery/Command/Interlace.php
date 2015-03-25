@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,10 +33,12 @@ final class Interlace implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
+        $resource = $canvas->getResource();
+
         imageinterlace($resource, (int)$options->get('interlace', 0));
 
-        return $resource;
+        return $canvas->withResource($resource);
     }
 }

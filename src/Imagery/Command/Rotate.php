@@ -12,6 +12,7 @@
 
 namespace Imagery\Command;
 
+use Imagery\Canvas;
 use Imagery\Command;
 use Imagery\Options;
 
@@ -32,8 +33,8 @@ final class Rotate implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute($resource, Options $options = null)
+    public function execute(Canvas $canvas, Options $options = null)
     {
-        return imagerotate($resource, $options->get('degrees'), 0);
+        return $canvas->withResource(imagerotate($canvas->getResource(), $options->get('degrees'), 0));
     }
 }
