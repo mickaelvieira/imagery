@@ -12,13 +12,13 @@
 
 namespace Imagery\Renderer;
 
-use Imagery\Renderer;
+use Imagery\Renderer as RendererInterface;
 
 /**
  * Class PngRenderer
  * @package Imagery\Renderer
  */
-final class PngRenderer implements Renderer
+final class PngRenderer implements RendererInterface
 {
     /**
      * @var resource

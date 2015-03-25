@@ -12,13 +12,13 @@
 
 namespace Imagery\Renderer;
 
-use Imagery\Renderer;
+use Imagery\Renderer as RendererInterface;
 
 /**
  * Class GifRenderer
  * @package Imagery\Renderer
  */
-final class GifRenderer implements Renderer
+final class GifRenderer implements RendererInterface
 {
     /**
      * @var resource

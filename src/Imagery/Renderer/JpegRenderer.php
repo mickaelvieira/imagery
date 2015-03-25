@@ -12,13 +12,13 @@
 
 namespace Imagery\Renderer;
 
-use Imagery\Renderer;
+use Imagery\Renderer as RendererInterface;
 
 /**
  * Class JpegRenderer
  * @package Imagery\Renderer
  */
-final class JpegRenderer implements Renderer
+final class JpegRenderer implements RendererInterface
 {
     /**
      * @var resource
