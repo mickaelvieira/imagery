@@ -58,7 +58,7 @@ final class Renderer
      */
     private function prepareQuality($quality)
     {
-        if ($this->canvas->getImageType() === IMAGETYPE_PNG) {
+        if ($this->canvas->isPng()) {
 
             $quality = ceil($quality / 10);
             if ($quality < 1) {
