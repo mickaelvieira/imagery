@@ -1,5 +1,8 @@
 # Imagery
 
+Yes another PHP image library. I do NOT recommend you to use it. This is a personal project that I use only for practicing.
+There are many image libraries for PHP [out there](https://packagist.org/search/?q=image) that should meet your requirements
+
 ## Installation
 
 ContentNegotiation requires php >= 5.4
@@ -42,12 +45,9 @@ $ ./bin/phpcs --standard=PSR2 ./src/
 
 ```php
 use Imagery\Image;
-use Imagery\Transformer;
 
 $image = new Image('/path/to/image');
-
-$transformer = new Transformer($image);
-$transformer->save('/path/to/new/image');
+$image->scale(50)->save('/path/to/new/image');
 
 ```
 
