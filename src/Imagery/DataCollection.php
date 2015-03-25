@@ -16,7 +16,7 @@ namespace Imagery;
  * Class DataCollection
  * @package Imagery
  */
-final class DataCollection implements \Countable, \IteratorAggregate
+final class DataCollection implements \Countable, \IteratorAggregate, ArrayConvertible
 {
 
     /**
@@ -82,5 +82,17 @@ final class DataCollection implements \Countable, \IteratorAggregate
         $copy = clone $this;
         //$copy->add($name, $value);
         return $copy;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = [];
+        foreach ($this->data as $d) {
+            $data[$d->getName()] = $d->getValue();
+        }
+        return $data;
     }
 }
