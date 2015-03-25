@@ -75,18 +75,6 @@ final class Collection implements \Countable, \IteratorAggregate, ArrayConvertib
     }
 
     /**
-     * @param string $name
-     * @param string $value
-     * @return \Imagery\Data\Collection
-     */
-    public function withParam($name, $value)
-    {
-        $copy = clone $this;
-        //$copy->add($name, $value);
-        return $copy;
-    }
-
-    /**
      * @return array
      */
     public function toArray()
