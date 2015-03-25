@@ -12,6 +12,8 @@
 
 namespace Imagery\Renderer;
 
+use Imagery\Renderer;
+
 /**
  * Class JpegRenderer
  * @package Imagery\Renderer

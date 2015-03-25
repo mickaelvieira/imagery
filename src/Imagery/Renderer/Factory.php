@@ -37,7 +37,8 @@ final class Factory
 
     /**
      * @param int $type
-     * @return \Imagery\Renderer\Renderer|null
+     * @return \Imagery\Renderer
+     * @throw \BadMethodCallException
      */
     public function select($type)
     {

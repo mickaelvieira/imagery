@@ -12,18 +12,67 @@
 
 namespace Imagery\Renderer;
 
+use Imagery\Canvas;
+use Imagery\Renderer\Factory as RendererFactory;
+
 /**
- * Interface Renderer
+ * Class Renderer
  * @package Imagery\Renderer
  */
-interface Renderer
+final class Renderer
 {
+    /**
+     * @var \Imagery\Canvas;
+     */
+    private $canvas;
+
+    /**
+     * @var \Imagery\Renderer\Factory
+     */
+    private $factory;
+
+    /**
+     * @param \Imagery\Canvas $canvas
+     */
+    public function __construct(Canvas $canvas)
+    {
+        $this->canvas  = $canvas;
+        $this->factory = new RendererFactory();
+    }
 
     /**
      * @param string $path
-     * @param resource $source
-     * @param int $quality
+     * @param int    $quality
      * @return bool
      */
-    public function render($path, $source, $quality);
+    public function render($path, $quality)
+    {
+        $quality  = $this->prepareQuality($quality);
+        $renderer = $this->factory->select($this->canvas->getImageType());
+
+        return $renderer->render($path, $this->canvas->getResource(), $quality);
+    }
+
+    /**
+     * @param $quality
+     * @return float|int
+     */
+    private function prepareQuality($quality)
+    {
+        if ($this->canvas->isPng()) {
+
+            $quality = ceil($quality / 10);
+            if ($quality < 1) {
+                $quality = 1;
+            }
+            $quality = (10 - $quality);
+
+        } elseif ($quality > 100) {
+            $quality = 100;
+        } elseif ($quality < 0) {
+            $quality = 0;
+        }
+
+        return $quality;
+    }
 }

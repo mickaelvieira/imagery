@@ -73,7 +73,7 @@ final class Image extends \SplFileInfo
      */
     public function save($path = null, $quality = 100)
     {
-        $renderer = new Renderer($this->canvas);
+        $renderer = new Renderer\Renderer($this->canvas);
 
         return $renderer->render($path, $quality);
     }
