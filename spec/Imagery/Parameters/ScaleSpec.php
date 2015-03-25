@@ -20,7 +20,7 @@ class ScaleSpec extends ObjectBehavior
 
     function it_should_return_the_parameters()
     {
-        $this->getParameters([])->shouldHaveType('Imagery\Parameters');
+        $this->getParameters([])->shouldHaveType('Imagery\Parameters\Parameters');
     }
 
     function it_should_map_the_parameters()

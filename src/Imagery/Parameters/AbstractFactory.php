@@ -12,8 +12,6 @@
 
 namespace Imagery\Parameters;
 
-use Imagery\Parameters;
-
 /**
  * Class AbstractFactory
  * @package Imagery\Parameters

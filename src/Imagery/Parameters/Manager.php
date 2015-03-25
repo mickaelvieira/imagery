@@ -43,7 +43,7 @@ class Manager
     /**
      * @param string $name
      * @param array $parameters
-     * @return \Imagery\Parameters
+     * @return \Imagery\Parameters\Parameters
      */
     public function find($name, array $parameters)
     {

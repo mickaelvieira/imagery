@@ -20,7 +20,7 @@ class InterlaceSpec extends ObjectBehavior
 
     function it_should_return_the_parameters()
     {
-        $this->getParameters([])->shouldHaveType('Imagery\Parameters');
+        $this->getParameters([])->shouldHaveType('Imagery\Parameters\Parameters');
     }
 
     function it_should_not_map_any_parameters()

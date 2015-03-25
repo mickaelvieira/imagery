@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Imagery;
+namespace spec\Imagery\Parameters;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class ParametersSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Imagery\Parameters');
+        $this->shouldHaveType('Imagery\Parameters\Parameters');
     }
 
     function it_should_be_countable()

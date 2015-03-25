@@ -14,7 +14,7 @@ namespace Imagery\Command;
 
 use Imagery\Canvas;
 use Imagery\Command;
-use Imagery\Parameters;
+use Imagery\Parameters\Parameters;
 
 /**
  * Class Rotate

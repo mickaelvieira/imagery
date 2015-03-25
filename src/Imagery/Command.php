@@ -12,6 +12,8 @@
 
 namespace Imagery;
 
+use Imagery\Parameters\Parameters;
+
 /**
  * Interface Command
  * @package Imagery
@@ -25,8 +27,8 @@ interface Command
 
     /**
      * @param \Imagery\Canvas $canvas
-     * @param \Imagery\Parameters $options
+     * @param \Imagery\Parameters\Parameters $parameters
      * @return resource
      */
-    public function execute(Canvas $canvas, Parameters $options = null);
+    public function execute(Canvas $canvas, Parameters $parameters = null);
 }
