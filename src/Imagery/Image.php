@@ -36,6 +36,11 @@ final class Image extends \SplFileInfo
     private $commander;
 
     /**
+     * @var \Imagery\ParametersManager
+     */
+    private $parameters;
+
+    /**
      * @var Canvas
      */
     private $canvas;
@@ -49,8 +54,9 @@ final class Image extends \SplFileInfo
 
         $this->isImage();
 
-        $this->canvas    = Canvas::fromPath($this->getPathname());
-        $this->commander = new CommandManager();
+        $this->canvas     = Canvas::fromPath($this->getPathname());
+        $this->commander  = new CommandManager();
+        $this->parameters = new ParametersManager();
 
         if ($this->isJpeg()) {
             $this->iptc = ExtractorFactory::select('iptc')->extract($this->getPathname());
@@ -160,11 +166,8 @@ final class Image extends \SplFileInfo
         $command = $this->commander->find($name);
 
         if ($command) {
-
-            $parameters = (!empty($arguments)) ? $arguments[0] : [];
-            $parameters = new Parameters($parameters);
-
-            $this->canvas = $command->execute($this->canvas, $parameters);
+            
+            $this->canvas = $command->execute($this->canvas, $this->parameters->find($name, $arguments));
 
         } else {
             throw new \LogicException(sprintf("Unknown command %s", $command));
