@@ -43,13 +43,19 @@ final class CommandManager
 
     /**
      * @param $name
-     * @return \Imagery\Command|false
+     * @return \Imagery\Command
+     * @throw \LogicException
      */
     public function find($name)
     {
         $commands = array_filter($this->commands, function (Command $command) use ($name) {
             return ($command->getName() === $name);
         });
-        return (current($commands)) ?: null;
+
+        if (empty($commands)) {
+            throw new \LogicException(sprintf("Command %s does not exist", $name));
+        }
+
+        return current($commands);
     }
 }
