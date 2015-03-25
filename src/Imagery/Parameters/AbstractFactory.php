@@ -19,9 +19,12 @@ namespace Imagery\Parameters;
 abstract class AbstractFactory
 {
     /**
-     * @return string
+     * string
      */
-    abstract public function getName();
+    public function getName()
+    {
+        return strtolower(end(explode("\\", get_class($this))));
+    }
 
     /**
      * {@inheritdoc}
@@ -40,7 +43,7 @@ abstract class AbstractFactory
      * @param array $parameters
      * @return array
      */
-    protected function mapParameters(array $parameters)
+    private function mapParameters(array $parameters)
     {
         $return = [];
         foreach ($this->getMap() as $key => $value) {
