@@ -1,15 +1,15 @@
 <?php
 
-namespace spec\Imagery;
+namespace spec\Imagery\Parameters;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ParametersManagerSpec extends ObjectBehavior
+class ManagerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Imagery\ParametersManager');
+        $this->shouldHaveType('Imagery\Parameters\Manager');
     }
 
     function it_should_build_crop_a_parameters()

@@ -1,10 +1,10 @@
 <?php
 
-namespace Imagery;
+namespace Imagery\Parameters;
 
 use \Imagery\Parameters\AbstractFactory as ParametersFactory;
 
-class ParametersManager
+class Manager
 {
     /**
      * @var array
@@ -17,12 +17,12 @@ class ParametersManager
     public function __construct()
     {
         $this->parameters = [
-            new Parameters\Crop(),
-            new Parameters\Flip(),
-            new Parameters\Interlace(),
-            new Parameters\Resize(),
-            new Parameters\Rotate(),
-            new Parameters\Scale()
+            new Crop(),
+            new Flip(),
+            new Interlace(),
+            new Resize(),
+            new Rotate(),
+            new Scale()
         ];
     }
 

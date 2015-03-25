@@ -14,6 +14,7 @@ namespace Imagery;
 
 use Imagery\Extractor\Factory as ExtractorFactory;
 use Imagery\Command\Manager as CommandManager;
+use Imagery\Parameters\Manager as ParametersManager;
 
 /**
  * Class Image
@@ -37,7 +38,7 @@ final class Image extends \SplFileInfo
     private $commander;
 
     /**
-     * @var \Imagery\ParametersManager
+     * @var \Imagery\Parameters\Manager
      */
     private $parameters;
 
