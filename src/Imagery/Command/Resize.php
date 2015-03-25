@@ -14,7 +14,7 @@ namespace Imagery\Command;
 
 use Imagery\Canvas;
 use Imagery\Command;
-use Imagery\Options;
+use Imagery\Parameters;
 
 /**
  * Class Resize
@@ -33,10 +33,14 @@ final class Resize implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute(Canvas $canvas, Options $options = null)
+    public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $destWidth  = $options->get('width');
-        $destHeight = $options->get('height');
+        $destWidth  = $parameters->get('width');
+        $destHeight = $parameters->get('height');
+
+        if (is_null($destWidth) && is_null($destHeight)) {
+            return $canvas;
+        }
 
         $srcWidth  = $canvas->getWidth();
         $srcHeight = $canvas->getHeight();

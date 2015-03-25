@@ -25,8 +25,8 @@ interface Command
 
     /**
      * @param \Imagery\Canvas $canvas
-     * @param \Imagery\Options $options
+     * @param \Imagery\Parameters $options
      * @return resource
      */
-    public function execute(Canvas $canvas, Options $options = null);
+    public function execute(Canvas $canvas, Parameters $options = null);
 }

@@ -14,7 +14,7 @@ namespace Imagery\Command;
 
 use Imagery\Canvas;
 use Imagery\Command;
-use Imagery\Options;
+use Imagery\Parameters;
 
 /**
  * Class Scale
@@ -33,9 +33,9 @@ final class Scale implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute(Canvas $canvas, Options $options = null)
+    public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $scale = $options->get('scale');
+        $scale = $parameters->get('scale');
 
         if (is_null($scale)) {
             return $canvas;

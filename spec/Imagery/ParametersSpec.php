@@ -5,11 +5,11 @@ namespace spec\Imagery;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class OptionsSpec extends ObjectBehavior
+class ParametersSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Imagery\Options');
+        $this->shouldHaveType('Imagery\Parameters');
     }
 
     function it_should_be_countable()

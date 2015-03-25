@@ -14,7 +14,7 @@ namespace Imagery\Command;
 
 use Imagery\Canvas;
 use Imagery\Command;
-use Imagery\Options;
+use Imagery\Parameters;
 
 /**
  * Class Crop
@@ -33,13 +33,13 @@ final class Crop implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute(Canvas $canvas, Options $options = null)
+    public function execute(Canvas $canvas, Parameters $parameters = null)
     {
         $srcWidth  = $canvas->getWidth();
         $srcHeight = $canvas->getHeight();
 
-        $width  = $options->get('width', $srcWidth);
-        $height = $options->get('height', $srcHeight);
+        $width  = $parameters->get('width', $srcWidth);
+        $height = $parameters->get('height', $srcHeight);
 
         $srcX = ($srcWidth / 2) - ($width / 2);
         $srcY = ($srcHeight / 2) - ($height / 2);

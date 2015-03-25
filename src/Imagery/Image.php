@@ -161,10 +161,10 @@ final class Image extends \SplFileInfo
 
         if ($command) {
 
-            $options = (!empty($arguments)) ? $arguments[0] : [];
-            $options = new Options($options);
+            $parameters = (!empty($arguments)) ? $arguments[0] : [];
+            $parameters = new Parameters($parameters);
 
-            $this->canvas = $command->execute($this->canvas, $options);
+            $this->canvas = $command->execute($this->canvas, $parameters);
 
         } else {
             throw new \LogicException(sprintf("Unknown command %s", $command));

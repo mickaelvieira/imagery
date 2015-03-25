@@ -16,7 +16,7 @@ namespace Imagery;
  * Class DataCollection
  * @package Imagery
  */
-final class Options implements \Countable
+final class Parameters implements \Countable
 {
     /**
      * @var array

@@ -14,7 +14,7 @@ namespace Imagery\Command;
 
 use Imagery\Canvas;
 use Imagery\Command;
-use Imagery\Options;
+use Imagery\Parameters;
 
 /**
  * Class Flip
@@ -33,9 +33,9 @@ final class Flip implements Command
     /**
      * {@inheritdoc}
      */
-    public function execute(Canvas $canvas, Options $options = null)
+    public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $mode = $options->get('mode');
+        $mode = $parameters->get('mode');
 
         if (is_null($mode)) {
             return $canvas;
