@@ -10,17 +10,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Imagery;
+namespace Imagery\Command;
 
 use Imagery\Command;
 
 /**
- * Class CommandManager
+ * Class Manager
  * @package Imagery
  */
-final class CommandManager
+final class Manager
 {
-
     /**
      * @var array
      */
@@ -32,12 +31,12 @@ final class CommandManager
     public function __construct()
     {
         $this->commands = [
-            new Command\Crop(),
-            new Command\Flip(),
-            new Command\Scale(),
-            new Command\Resize(),
-            new Command\Rotate(),
-            new Command\Interlace(),
+            new Crop(),
+            new Flip(),
+            new Scale(),
+            new Resize(),
+            new Rotate(),
+            new Interlace(),
         ];
     }
 

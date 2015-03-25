@@ -13,6 +13,7 @@
 namespace Imagery;
 
 use Imagery\Extractor\Factory as ExtractorFactory;
+use Imagery\Command\Manager as CommandManager;
 
 /**
  * Class Image
@@ -31,7 +32,7 @@ final class Image extends \SplFileInfo
     private $exif;
 
     /**
-     * @var \Imagery\CommandManager
+     * @var \Imagery\Command\Manager
      */
     private $commander;
 
