@@ -34,24 +34,24 @@ final class Resize implements Command
      */
     public function execute($resource, Options $options = null)
     {
-        $width  = $options->get('width');
-        $height = $options->get('height');
+        $destWidth  = $options->get('width');
+        $destHeight = $options->get('height');
 
         $srcWidth  = imagesx($resource);
         $srcHeight = imagesy($resource);
 
-        if (!is_null($width) && is_null($height)) {
-            $ratio  = $width / $srcWidth;
-            $height = $srcHeight * $ratio;
-        } elseif (is_null($width) && !is_null($height)) {
-            $ratio = $srcHeight;
-            $width = $srcWidth * $ratio;
-        } else {
-            $width  = $srcWidth;
-            $height = $srcHeight;
+        if (!is_null($destWidth) && is_null($destHeight)) {
+            $ratio = $destWidth / $srcWidth;
+            $destHeight = floor($srcHeight * $ratio);
+        } elseif (is_null($destWidth) && !is_null($destHeight)) {
+            $ratio = $destHeight / $srcHeight;
+            $destWidth = floor($srcWidth * $ratio);
+        } elseif (is_null($destWidth) && is_null($destHeight)) {
+            $destWidth  = $srcWidth;
+            $destHeight = $srcHeight;
         }
 
-        $image = imagecreatetruecolor($width, $height);
+        $image = imagecreatetruecolor($destWidth, $destHeight);
 
         imagecopyresampled(
             $image,
@@ -60,10 +60,10 @@ final class Resize implements Command
             0,
             0,
             0,
-            $width,
-            $height,
-            imagesx($resource),
-            imagesy($resource)
+            $destWidth,
+            $destHeight,
+            $srcWidth,
+            $srcHeight
         );
 
         return $image;
