@@ -24,7 +24,7 @@ class Flip extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => 'mode'
+            0 => new Parameter('mode', 'int')
         ];
     }
 }

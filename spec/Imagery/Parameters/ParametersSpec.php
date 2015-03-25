@@ -2,6 +2,7 @@
 
 namespace spec\Imagery\Parameters;
 
+use Imagery\Parameters\Parameter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -33,33 +34,22 @@ class ParametersSpec extends ObjectBehavior
     function it_should_return_an_option()
     {
         $this->beConstructedWith([
-            'other1' => 'value1',
-            'other2' => 'value2',
-            'other3' => 'value3'
+            (new Parameter('other1', 'string'))->withValue('value1'),
+            (new Parameter('other2', 'string'))->withValue('value2'),
+            (new Parameter('other3', 'string'))->withValue('value3')
         ]);
 
         $this->get('other2')->shouldBeEqualTo('value2');
     }
 
-    function it_should_return_the_default_value_when_option_does_not_exist_and_default_value_has_been_provided()
+    function it_should_throw_an_exception_when_a_parameter_does_not_exist()
     {
         $this->beConstructedWith([
-            'other1' => 'value1',
-            'other2' => 'value2',
-            'other3' => 'value3'
+            (new Parameter('other1', 'string'))->withValue('value1'),
+            (new Parameter('other2', 'string'))->withValue('value2'),
+            (new Parameter('other3', 'string'))->withValue('value3')
         ]);
 
-        $this->get('other4', 'default value')->shouldBeEqualTo('default value');
-    }
-
-    function it_should_return_null_when_option_does_not_exist_and_default_value_has_not_been_provided()
-    {
-        $this->beConstructedWith([
-            'other1' => 'value1',
-            'other2' => 'value2',
-            'other3' => 'value3'
-        ]);
-
-        $this->get('other4', 'default value')->shouldBeEqualTo('default value');
+        $this->shouldThrow('\LogicException')->duringGet('other4');
     }
 }

@@ -35,7 +35,7 @@ abstract class AbstractFactory
     }
 
     /**
-     * @return array
+     * @return \Imagery\Parameters\Parameter[]
      */
     abstract protected function getMap();
 
@@ -45,13 +45,14 @@ abstract class AbstractFactory
      */
     private function mapParameters(array $parameters)
     {
-        $return = [];
-        foreach ($this->getMap() as $key => $value) {
+        $params = [];
+        foreach ($this->getMap() as $key => $parameter) {
             if (array_key_exists($key, $parameters)) {
-                $return[$value] = $parameters[$key];
+                $parameter = $parameter->withValue($parameters[$key]);
             }
+            array_push($params, $parameter);
         }
 
-        return $return;
+        return $params;
     }
 }

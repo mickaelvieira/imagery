@@ -24,7 +24,7 @@ class Rotate extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => 'degrees'
+            0 => new Parameter('degrees', 'int')
         ];
     }
 }

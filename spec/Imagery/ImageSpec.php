@@ -151,7 +151,7 @@ class ImageSpec extends ObjectBehavior
     function it_should_crop_the_resource()
     {
         $this->beConstructedWith(vfsStream::url('dir/file.png'));
-        $this->shouldNotThrow('\Exception')->duringCrop();
+        $this->shouldNotThrow('\Exception')->duringCrop(100, 100);
     }
 
     function it_should_resize_the_resource()

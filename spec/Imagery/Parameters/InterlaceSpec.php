@@ -23,8 +23,8 @@ class InterlaceSpec extends ObjectBehavior
         $this->getParameters([])->shouldHaveType('Imagery\Parameters\Parameters');
     }
 
-    function it_should_not_map_any_parameters()
+    function it_should_map_the_parameters()
     {
-        $this->getParameters([])->count()->shouldBeEqualTo(0);
+        $this->getParameters([0 => 1])->get('interlace')->shouldBeEqualTo(1);
     }
 }

@@ -21,16 +21,14 @@ final class Parameters implements \Countable
     /**
      * @var array
      */
-    private $options = [];
+    private $parameters = [];
 
     /**
-     * @param array $options
+     * @param \Imagery\Parameters\Parameter[] $parameters
      */
-    public function __construct(array $options = [])
+    public function __construct(array $parameters = [])
     {
-        foreach ($options as $name => $value) {
-            $this->options[$name] = $value;
-        }
+        $this->parameters = $parameters;
     }
 
     /**
@@ -38,16 +36,25 @@ final class Parameters implements \Countable
      */
     public function count()
     {
-        return count($this->options);
+        return count($this->parameters);
     }
 
     /**
-     * @param string $name
-     * @param null   $default
-     * @return null
+     * @param $name
+     * @return mixed
+     * @throw \LogicException
      */
-    public function get($name, $default = null)
+    public function get($name)
     {
-        return (array_key_exists($name, $this->options)) ? $this->options[$name] : $default;
+        $parameters = array_filter($this->parameters, function (Parameter $parameter) use ($name) {
+            return $parameter->getName() === $name;
+        });
+
+        if (empty($parameters)) {
+            throw new \LogicException(sprintf("Parameter with name %s does not exist", $name));
+        }
+        $parameter = current($parameters);
+
+        return $parameter->getValue();
     }
 }
