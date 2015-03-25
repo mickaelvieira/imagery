@@ -79,11 +79,35 @@ final class Image extends \SplFileInfo
     }
 
     /**
+     * @return int
+     */
+    public function getWidth()
+    {
+        return $this->canvas->getWidth();
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight()
+    {
+        return $this->canvas->getHeight();
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->canvas->getMimeType();
+    }
+
+    /**
      * @return bool
      */
     public function isLandscape()
     {
-        return ($this->canvas->getWidth() > $this->canvas->getHeight());
+        return $this->canvas->isLandscape();
     }
 
     /**
@@ -91,7 +115,7 @@ final class Image extends \SplFileInfo
      */
     public function isPortrait()
     {
-        return ($this->canvas->getWidth() < $this->canvas->getHeight());
+        return $this->canvas->isPortrait();
     }
 
     /**
@@ -107,7 +131,7 @@ final class Image extends \SplFileInfo
      */
     public function isJpeg()
     {
-        return ($this->canvas->getImageType() === IMAGETYPE_JPEG);
+        return $this->canvas->isJpeg();
     }
 
     /**
@@ -115,7 +139,7 @@ final class Image extends \SplFileInfo
      */
     public function isGif()
     {
-        return ($this->canvas->getImageType() === IMAGETYPE_GIF);
+        return $this->canvas->isGif();
     }
 
     /**
@@ -123,7 +147,7 @@ final class Image extends \SplFileInfo
      */
     public function isPng()
     {
-        return ($this->canvas->getImageType() === IMAGETYPE_PNG);
+        return $this->canvas->isPng();
     }
 
     /**
@@ -142,8 +166,6 @@ final class Image extends \SplFileInfo
 
             $this->canvas = $command->execute($this->canvas, $options);
 
-        } elseif (method_exists($this->canvas, $name)) {
-            return $this->canvas->$name();
         } else {
             throw new \LogicException(sprintf("Unknown command %s", $command));
         }

@@ -42,7 +42,7 @@ class CommandManagerSpec extends ObjectBehavior
         $this->find('scale')->shouldHaveType('Imagery\Command\Scale');
     }
 
-    function it_should_throw_an_error_when_a_command_does_not_exist()
+    function it_should_throw_an_exception_when_a_command_does_not_exist()
     {
         $this->shouldThrow('\LogicException')->duringFind('test');
     }

@@ -117,6 +117,22 @@ final class Canvas
     /**
      * @return bool
      */
+    public function isLandscape()
+    {
+        return ($this->getWidth() > $this->getHeight());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPortrait()
+    {
+        return ($this->getWidth() < $this->getHeight());
+    }
+
+    /**
+     * @return bool
+     */
     public function isJpeg()
     {
         return ($this->type === IMAGETYPE_JPEG);
