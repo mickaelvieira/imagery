@@ -21,6 +21,7 @@ final class Factory
     /**
      * @param int $type
      * @return \Imagery\Extractor\Extractor
+     * @throw \LogicException
      */
     public static function select($type)
     {
@@ -29,7 +30,7 @@ final class Factory
         } elseif ($type === "iptc") {
             return new IptcExtractor();
         } else {
-            throw new \BadMethodCallException(sprintf("Type %s is not supported, expected exif or iptc", $type));
+            throw new \LogicException(sprintf("Type %s is not supported, expected exif or iptc", $type));
         }
     }
 }
