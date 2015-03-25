@@ -166,13 +166,7 @@ final class Image extends \SplFileInfo
         $command = $this->commander->find($name);
 
         if ($command) {
-<<<<<<< Updated upstream
-            
             $this->canvas = $command->execute($this->canvas, $this->parameters->find($name, $arguments));
-
-=======
-            $this->canvas = $command->execute($this->canvas, $this->parameters->find($name, $arguments));
->>>>>>> Stashed changes
         } else {
             throw new \LogicException(sprintf("Unknown command %s", $command));
         }
