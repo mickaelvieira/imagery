@@ -10,17 +10,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Imagery;
+namespace Imagery\Data;
+
+use Imagery\ArrayConvertible;
 
 /**
- * Class DataCollection
- * @package Imagery
+ * Class Collection
+ * @package Imagery\Data
  */
-final class DataCollection implements \Countable, \IteratorAggregate, ArrayConvertible
+final class Collection implements \Countable, \IteratorAggregate, ArrayConvertible
 {
 
     /**
-     * @var \Imagery\Data[]
+     * @var \Imagery\Data\Data[]
      */
     private $data = [];
 
@@ -36,7 +38,7 @@ final class DataCollection implements \Countable, \IteratorAggregate, ArrayConve
 
     /**
      * @param $name
-     * @return \Imagery\Data
+     * @return \Imagery\Data\Data
      */
     public function find($name)
     {
@@ -75,7 +77,7 @@ final class DataCollection implements \Countable, \IteratorAggregate, ArrayConve
     /**
      * @param string $name
      * @param string $value
-     * @return \Imagery\DataCollection
+     * @return \Imagery\Data\Collection
      */
     public function withParam($name, $value)
     {

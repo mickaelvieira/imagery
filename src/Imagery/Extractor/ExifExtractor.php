@@ -12,7 +12,7 @@
 
 namespace Imagery\Extractor;
 
-use Imagery\DataCollection;
+use Imagery\Data\Collection;
 
 /**
  * Class Exif
@@ -37,7 +37,7 @@ final class ExifExtractor implements Extractor
             }
         }
 
-        return new DataCollection($data);
+        return new Collection($data);
     }
 
     /**

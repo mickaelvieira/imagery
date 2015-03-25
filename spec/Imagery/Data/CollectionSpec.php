@@ -1,16 +1,16 @@
 <?php
 
-namespace spec\Imagery;
+namespace spec\Imagery\Data;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class DataCollectionSpec extends ObjectBehavior
+class CollectionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->beConstructedWith([]);
-        $this->shouldHaveType('Imagery\DataCollection');
+        $this->shouldHaveType('Imagery\Data\Collection');
         $this->shouldImplement('Imagery\ArrayConvertible');
     }
 
@@ -59,7 +59,7 @@ class DataCollectionSpec extends ObjectBehavior
         $this->beConstructedWith([
             'target' => 'value'
         ]);
-        $this->find('target')->shouldHaveType('Imagery\Data');
+        $this->find('target')->shouldHaveType('Imagery\Data\Data');
     }
 
     function it_should_return_null_when_it_does_not_find_a_data()

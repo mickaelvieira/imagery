@@ -23,12 +23,12 @@ use Imagery\Parameters\Manager as ParametersManager;
 final class Image extends \SplFileInfo
 {
     /**
-     * @var \Imagery\DataCollection
+     * @var \Imagery\Collection
      */
     private $iptc;
 
     /**
-     * @var \Imagery\DataCollection
+     * @var \Imagery\Collection
      */
     private $exif;
 
@@ -79,7 +79,7 @@ final class Image extends \SplFileInfo
     }
 
     /**
-     * @return DataCollection
+     * @return Collection
      */
     public function getExif()
     {
@@ -127,7 +127,7 @@ final class Image extends \SplFileInfo
     }
 
     /**
-     * @return \Imagery\DataCollection
+     * @return \Imagery\Collection
      */
     public function getIptc()
     {

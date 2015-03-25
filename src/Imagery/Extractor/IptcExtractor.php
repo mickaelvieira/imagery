@@ -12,7 +12,7 @@
 
 namespace Imagery\Extractor;
 
-use Imagery\DataCollection;
+use Imagery\Data\Collection;
 
 /**
  * Class Iptc
@@ -63,7 +63,7 @@ final class IptcExtractor implements Extractor
                 }
             }
         }
-        return new DataCollection($data);
+        return new Collection($data);
     }
 
     /**

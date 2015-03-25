@@ -13,7 +13,7 @@
 namespace Imagery;
 
 /**
- * Class DataCollection
+ * Class Collection
  * @package Imagery
  */
 final class Parameters implements \Countable

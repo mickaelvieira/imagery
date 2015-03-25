@@ -20,7 +20,7 @@ interface Extractor
 {
     /**
      * @param string $path
-     * @return \Imagery\DataCollection
+     * @return \Imagery\Data\Collection
      */
     public function extract($path);
 }

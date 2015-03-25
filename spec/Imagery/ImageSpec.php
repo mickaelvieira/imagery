@@ -97,13 +97,13 @@ class ImageSpec extends ObjectBehavior
     function it_should_return_the_jpeg_exif_collection()
     {
         $this->beConstructedWith(vfsStream::url('dir/file.jpg'));
-        $this->getExif()->shouldHaveType('\Imagery\DataCollection');
+        $this->getExif()->shouldHaveType('\Imagery\Data\Collection');
     }
 
     function it_should_return_the_jpeg_iptc_collection()
     {
         $this->beConstructedWith(vfsStream::url('dir/file.jpg'));
-        $this->getIptc()->shouldHaveType('\Imagery\DataCollection');
+        $this->getIptc()->shouldHaveType('\Imagery\Data\Collection');
     }
 
     function it_should_not_return_the_gif_exif_collection()

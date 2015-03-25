@@ -10,11 +10,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Imagery;
+namespace Imagery\Data;
 
 /**
  * Class Data
- * @package Imagery
+ * @package Imagery\Data
  */
 final class Data
 {
