@@ -10,6 +10,14 @@ namespace Imagery\Parameters;
 final class Parameter
 {
 
+    const TYPE_INTEGER = 'int';
+    const TYPE_BOOLEAN = 'bool';
+    const TYPE_STRING  = 'string';
+    const TYPE_FLOAT   = 'float';
+
+    /**
+     * @var array
+     */
     private $types = [
         'int',
         'integer',
@@ -50,38 +58,6 @@ final class Parameter
 
         $this->name = (string)$name;
         $this->type = (string)$type;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAString()
-    {
-        return ($this->type === "string");
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAInteger()
-    {
-        return ($this->type === "int" || $this->type === "integer");
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAFloat()
-    {
-        return ($this->type === "float");
-    }
-
-    /**
-     * @return bool
-     */
-    public function isABoolean()
-    {
-        return ($this->type === 'bool' || $this->type === 'boolean');
     }
 
     /**

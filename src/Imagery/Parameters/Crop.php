@@ -24,8 +24,8 @@ class Crop extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => new Parameter('width', 'int'),
-            1 => new Parameter('height', 'int')
+            0 => new Parameter('width', Parameter::TYPE_INTEGER),
+            1 => new Parameter('height', Parameter::TYPE_INTEGER)
         ];
     }
 }

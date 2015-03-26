@@ -24,7 +24,7 @@ class Interlace extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => (new Parameter('interlace', 'int'))->withValue(1)
+            0 => (new Parameter('interlace', Parameter::TYPE_INTEGER))->withValue(1)
         ];
     }
 }

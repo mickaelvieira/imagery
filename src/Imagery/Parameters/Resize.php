@@ -24,8 +24,8 @@ class Resize extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => (new Parameter('width', 'int'))->maybeNull(),
-            1 => (new Parameter('height', 'int'))->maybeNull()
+            0 => (new Parameter('width', Parameter::TYPE_INTEGER))->maybeNull(),
+            1 => (new Parameter('height', Parameter::TYPE_INTEGER))->maybeNull()
         ];
     }
 }

@@ -26,7 +26,7 @@ class Scale extends AbstractFactory
     protected function getMap()
     {
         return [
-            0 => new Parameter('scale', 'int')
+            0 => new Parameter('scale', Parameter::TYPE_INTEGER)
         ];
     }
 }

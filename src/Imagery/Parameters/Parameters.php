@@ -19,7 +19,7 @@ namespace Imagery\Parameters;
 final class Parameters implements \Countable
 {
     /**
-     * @var array
+     * @var \Imagery\Parameters\Parameter[] $parameters
      */
     private $parameters = [];
 
