@@ -44,7 +44,7 @@ final class Parameters implements \Countable
      * @return mixed
      * @throw \LogicException
      */
-    public function get($name)
+    public function getByName($name)
     {
         $parameters = array_filter($this->parameters, function (Parameter $parameter) use ($name) {
             return $parameter->getName() === $name;

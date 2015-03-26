@@ -35,8 +35,8 @@ final class Resize implements Command
      */
     public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $destWidth  = $parameters->get('width');
-        $destHeight = $parameters->get('height');
+        $destWidth  = $parameters->getByName('width');
+        $destHeight = $parameters->getByName('height');
 
         if (is_null($destWidth) && is_null($destHeight)) {
             return $canvas;

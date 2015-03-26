@@ -35,6 +35,6 @@ final class Rotate implements Command
      */
     public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        return $canvas->withResource(imagerotate($canvas->getResource(), $parameters->get('degrees'), 0));
+        return $canvas->withResource(imagerotate($canvas->getResource(), $parameters->getByName('degrees'), 0));
     }
 }

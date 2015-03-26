@@ -35,7 +35,7 @@ final class Flip implements Command
      */
     public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $mode = $parameters->get('mode');
+        $mode = $parameters->getByName('mode');
 
         if (is_null($mode)) {
             return $canvas;

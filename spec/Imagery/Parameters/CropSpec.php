@@ -25,7 +25,7 @@ class CropSpec extends ObjectBehavior
 
     function it_should_map_the_parameters()
     {
-        $this->getParameters([0 => 300, 1 => 200])->get('width')->shouldBeEqualTo(300);
-        $this->getParameters([0 => 300, 1 => 200])->get('height')->shouldBeEqualTo(200);
+        $this->getParameters([0 => 300, 1 => 200])->getByName('width')->shouldBeEqualTo(300);
+        $this->getParameters([0 => 300, 1 => 200])->getByName('height')->shouldBeEqualTo(200);
     }
 }

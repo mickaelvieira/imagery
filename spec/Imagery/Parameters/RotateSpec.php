@@ -25,6 +25,6 @@ class RotateSpec extends ObjectBehavior
 
     function it_should_map_the_parameters()
     {
-        $this->getParameters([0 => 90])->get('degrees')->shouldBeEqualTo(90);
+        $this->getParameters([0 => 90])->getByName('degrees')->shouldBeEqualTo(90);
     }
 }

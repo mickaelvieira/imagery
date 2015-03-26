@@ -35,7 +35,7 @@ final class Scale implements Command
      */
     public function execute(Canvas $canvas, Parameters $parameters = null)
     {
-        $scale = $parameters->get('scale');
+        $scale = $parameters->getByName('scale');
 
         if (is_null($scale)) {
             return $canvas;

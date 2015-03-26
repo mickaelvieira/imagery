@@ -3,6 +3,7 @@
 namespace spec\Imagery\Parameters;
 
 use Imagery\Parameters\Parameter;
+use Imagery\Parameters\Parameters;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -39,7 +40,7 @@ class ParametersSpec extends ObjectBehavior
             (new Parameter('other3', 'string'))->withValue('value3')
         ]);
 
-        $this->get('other2')->shouldBeEqualTo('value2');
+        $this->getByName('other2')->shouldBeEqualTo('value2');
     }
 
     function it_should_throw_an_exception_when_a_parameter_does_not_exist()
@@ -50,6 +51,6 @@ class ParametersSpec extends ObjectBehavior
             (new Parameter('other3', 'string'))->withValue('value3')
         ]);
 
-        $this->shouldThrow('\LogicException')->duringGet('other4');
+        $this->shouldThrow('\LogicException')->duringGetByName('other4');
     }
 }

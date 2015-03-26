@@ -25,6 +25,6 @@ class ScaleSpec extends ObjectBehavior
 
     function it_should_map_the_parameters()
     {
-        $this->getParameters([0 => 50])->get('scale')->shouldBeEqualTo(50);
+        $this->getParameters([0 => 50])->getByName('scale')->shouldBeEqualTo(50);
     }
 }

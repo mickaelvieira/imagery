@@ -25,6 +25,6 @@ class InterlaceSpec extends ObjectBehavior
 
     function it_should_map_the_parameters()
     {
-        $this->getParameters([0 => 1])->get('interlace')->shouldBeEqualTo(1);
+        $this->getParameters([0 => 1])->getByName('interlace')->shouldBeEqualTo(1);
     }
 }

@@ -37,7 +37,7 @@ final class Interlace implements Command
     {
         $resource = $canvas->getResource();
 
-        imageinterlace($resource, $parameters->get('interlace'));
+        imageinterlace($resource, $parameters->getByName('interlace'));
 
         return $canvas->withResource($resource);
     }

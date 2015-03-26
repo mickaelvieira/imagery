@@ -25,6 +25,6 @@ class FlipSpec extends ObjectBehavior
 
     function it_should_map_the_parameters()
     {
-        $this->getParameters([0 => 90])->get('mode')->shouldBeEqualTo(90);
+        $this->getParameters([0 => 90])->getByName('mode')->shouldBeEqualTo(90);
     }
 }

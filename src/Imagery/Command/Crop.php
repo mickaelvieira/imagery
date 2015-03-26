@@ -38,8 +38,8 @@ final class Crop implements Command
         $srcWidth  = $canvas->getWidth();
         $srcHeight = $canvas->getHeight();
 
-        $width  = $parameters->get('width');
-        $height = $parameters->get('height');
+        $width  = $parameters->getByName('width');
+        $height = $parameters->getByName('height');
 
         $srcX = ($srcWidth / 2) - ($width / 2);
         $srcY = ($srcHeight / 2) - ($height / 2);
