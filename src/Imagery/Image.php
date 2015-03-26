@@ -1,8 +1,7 @@
 <?php
 
 /*
- * This file is part of CollectionJson, a php implementation
- * of the Collection+JSON Media Type
+ * This file is part of Imagery package
  *
  * (c) Mickaël Vieira <contact@mickael-vieira.com>
  *
