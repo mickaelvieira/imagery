@@ -45,6 +45,30 @@ class ParameterSpec extends ObjectBehavior
         $this->shouldThrow()->duringWithValue(null);
     }
 
+    function it_should_return_the_type_string()
+    {
+        $this->beConstructedWith('id', Parameter::TYPE_STRING);
+        $this->getType()->shouldBeEqualTo(Parameter::TYPE_STRING);
+    }
+
+    function it_should_return_the_type_integer()
+    {
+        $this->beConstructedWith('id', Parameter::TYPE_INTEGER);
+        $this->getType()->shouldBeEqualTo(Parameter::TYPE_INTEGER);
+    }
+
+    function it_should_return_the_type_boolean()
+    {
+        $this->beConstructedWith('id', Parameter::TYPE_BOOLEAN);
+        $this->getType()->shouldBeEqualTo(Parameter::TYPE_BOOLEAN);
+    }
+
+    function it_should_return_the_type_float()
+    {
+        $this->beConstructedWith('id', Parameter::TYPE_FLOAT);
+        $this->getType()->shouldBeEqualTo(Parameter::TYPE_FLOAT);
+    }
+
     function it_should_not_throw_an_exception_when_it_has_been_marked_as_may_be_null()
     {
         $this->beConstructedWith('id', Parameter::TYPE_STRING);
