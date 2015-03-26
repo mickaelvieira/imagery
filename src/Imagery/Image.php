@@ -42,7 +42,7 @@ final class Image extends \SplFileInfo
     private $parameters;
 
     /**
-     * @var Canvas
+     * @var \Imagery\Canvas
      */
     private $canvas;
 
